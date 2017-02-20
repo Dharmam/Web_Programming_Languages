@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+	<head>
+	<title>DSB150030, Practice Work 1</title>
+		<script>
+function validateHtml() {
+var username = document.getElementById("user").value; 
+var password = document.getElementById("password").value; 
+var email = document.getElementById("email").value; 
+var result = "validation failed";
+if(checkUsername(username)){
+if(checkPassword(password)){
+if(checkEmail(email)){
+result = "validation successfull !"
+}
+}
+}
+createHtml(result); 
+}
+
+function checkUsername(username){
+    if( /^[0-9a-zA-Z_.-]+$/.test(username)){
+	return true;
+	}
+	else{
+	createHtml("Username must contain only alpha-numeric characters.");
+	return false;
+	}
+}
+
+function checkPassword(password){
+if( password.length < 8 ) {
+createHtml("Password must be at least 8 characters long.")
+ 		return false;
+ }
+ else {
+ return true;
+ }
+}
+
+function checkEmail(email){
+var re = /\S+@\S+\.\S+/;
+    if( re.test(email)){
+	return true;
+	}
+	else{
+	createHtml("Email must be in <anystring>@<anystring>.<anystring> formate.")
+	}
+}
+
+function createHtml(result){
+    var para = document.createElement("p");
+var node = document.createTextNode(result);
+para.appendChild(node);
+
+if(result === "validation successfull !"){
+para.style.color = "green";
+}
+else {
+para.style.color ="Red";
+}
+
+var element = document.getElementById("target");
+element.appendChild(para);
+}
+				</script>
+			</head>
+
+			<body>
+
+				<div id = "target">
+				</div>
+				<form>
+  User name:<br>
+						<input type="text" name="username" id = "user"  >
+							<br>
+  Password:<br>
+									<input type="text" name="password" id = "password">
+										<br>
+  Email ID:<br>
+												<input type="text" name="email" id = "email" >
+													<br>
+														<button type="button" onclick="validateHtml()">Submit</button>
+
+
+													</form>
+												</body>
+
+											</html>
