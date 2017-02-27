@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<head>
+		<script>
+		function doFunction(){
+debugger;
+			var y =  document.getElementById("year") ;
+			var year = y.options[y.selectedIndex].value ;
+			var g = document.getElementById("gender") ;
+			var gender = g.options[g.selectedIndex].value ;
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("target").innerHTML = this.responseText;
+				}else if(this.status == 500 || this.status == 404){
+					document.getElementById("target").innerHTML = "<p>Oops ! Server error, please try again later.</p>";	
+				}else{
+					document.getElementById("target").innerHTML = "<p>Loading...</p>";
+				}
+			};
+			xmlhttp.open("GET", "babynames.php?year=" + year + "&gender=" + gender, true);
+			xmlhttp.send();
+
+		}
+		</script>
+	</head>
+	<select id = "year" name = "year">
+		<option value = "all">--All--</option>
+		<option value="2005">2005</option>
+		<option value="2006">2006</option>
+		<option value="2007">2007</option>
+		<option value="2008">2008</option>
+		<option value="2009">2009</option>
+		<option value="2010">2010</option>
+		<option value="2011">2011</option>
+		<option value="2012">2012</option>
+		<option value="2013">2013</option>
+		<option value="2014">2014</option>
+		<option value="2015">2015</option>
+	</select>
+
+	<select id = "gender" name = "gender">
+		<option value = "all">--All--</option>
+		<option value = 'f'>Female</option>
+		<option value = 'm'>Male</option>
+	</select>
+
+	<input id="clickMe" type="button" value="clickme" onclick="doFunction();" />
+
+	<div id = "target">
+
+	</div>
+
+</body>
+</html>
